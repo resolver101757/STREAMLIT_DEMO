@@ -9,79 +9,50 @@ First_app.py                        shows a bunch of objects thrown onto the web
 take_a_picture.py                   draws boundries around a still photo teken on the webcam (or what ever is the default camera)
 open_cv_face_detection _video.py    is simular take_a_picture.py but shows it in a video 
 haarcascades folder                 has different opencv face detection parameters 
-
+aruco_demo.py                       a quick demo find aruco items 
 
 The openCV was taken from this article : https://towardsdatascience.com/computer-vision-for-beginners-part-3-79de62dbeef7 and her git page : https://github.com/jjone36/vision_4_beginners
 
 
 
-### Installing Streamlit on a Raspberry PI 
+### Installing streamlit on 64bit Raspberry PI OS using conda - confirmed working on Raspberry Pi 4 Model B 4 Gb RAM
 
-Streamlit wont install using the pip as of 31/12/2020, it results in a error, it has to be installed through mini conda 
+Followed the instructions on the post here : https://discuss.streamlit.io/t/raspberry-pi-streamlit/2900/43
 
-
-I followed the instructions here : https://gist.github.com/simoncos/a7ce35babeaf73f512be24135c0fbafb which are: 
-
-wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-armv7l.sh
-sudo md5sum Miniconda3-latest-Linux-armv7l.sh # (optional) check md5
-sudo /bin/bash Miniconda3-latest-Linux-armv7l.sh # -> change default directory to /home/pi/miniconda3
-sudo nano /home/pi/.bashrc # -> add: export PATH="/home/pi/miniconda3/bin:$PATH"
-sudo reboot -h now
-
-Once conda is installed, i followed :  https://stackoverflow.com/questions/39371772/how-to-install-anaconda-on-raspberry-pi-3-model-b/56852714#56852714 and ran the commands below to install the latest python package
-
-conda config --add channels rpi
-conda install python=3.6
+Streamlit wont installed on 32bit Raspbian due to supported libraries.  We will use the ARM64 (the usual as of writing this is 32bit raspbian) which is still in beta but does work.  The 64bit version is also recomended for open CV due to speed.  Streamlit also recomends using conda to install its package ( it wont work otherwise), it also makes opencv easier too.  This was installed on a Raspberry Pi 4 Model B 4 Gb RAM.  Instructions below:
 
 
-Then i created a seperated enviorment to install conda using the commands below (followed instructions here: https://discuss.streamlit.io/t/install-streamlit-with-anaconda/714/4)
+A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img - download from here https://downloads.raspberrypi.org/raspios_arm64/images/
+$ wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh 4
+$ chmod +x Archiconda3-0.2.3-Linux-aarch64.sh
+$ ./Archiconda3-0.2.3-Linux-aarch64.sh (takes quite a while)
+$ conda install -c conda-forge streamlit (as @randyzwitch as suggested above)
+Streamlit installs – but does not work yet (I got AttributeError: module ‘google.protobuf.descriptor’ has no attribute '_internal_create_key when I tried to run the streamlit hello app)
+$ conda update conda -y
+$ pip install --upgrade protobuf (this solved: AttributeError: module ‘google.protobuf.descriptor’ …)
+$ pip install --upgrade pip (just for good measure – most likely not required)42 Gb RAM,
+A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img (I haven’t done any update of raspios because that would just be a waste of time if the Streamlit install should fail)
+$ wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh 4
+$ chmod +x Archiconda3-0.2.3-Linux-aarch64.sh
+$ ./Archiconda3-0.2.3-Linux-aarch64.sh (takes quite a while)
+$ conda install -c conda-forge streamlit (as @randyzwitch as suggested above)
+Streamlit installs – but does not work yet (I got AttributeError: module ‘google.protobuf.descriptor’ has no attribute '_internal_create_key when I tried to run the streamlit hello app)
+$ conda update conda -y
+$ pip install --upgrade protobuf (this solved: AttributeError: module ‘google.protobuf.descriptor’ …)
+$ pip install --upgrade pip (just for good measure – most likely not required)
 
-conda create -y -n streamlit python=3.7
-conda activate streamlit
-pip install streamlit
-
-Other useful resources are :
-
-step by step guide to installing conda : https://www.anegron.site/2020/06/18/how-to-install-conda-and-docker-on-your-raspberry-pi/
-installing streamlit in conda : https://anaconda.org/conda-forge/streamlit
 
 
 ### arUco 
 
-not completed this one yet but might be worth install through conda mini.  I had trouble installing on windows, it might be corrected by following https://stackoverflow.com/questions/45972357/python-opencv-aruco-no-module-named-cv2-aruco:
+Arcuo worked using the installation " streamlit on 64bit Raspberry PI OS using conda" above on Raspberry PI.  I imagine it will work on multiple linux versions, just need to make sure archicture version match up, that seams to be a sticking point on this and opencv.
 
-"So I uninstalled opencv-python using
+It didnt like the following statements.  The images can be loaded into memory.   
 
-pip uninstall opencv-python
-Run the program and same error. Then I uninstalled opencv-contrib-python
+cv2.imshow('Display', frame)
+if cv2.waitKey(1) & 0xFF == ord('q'):
+break
 
-pip uninstall opencv-contrib-python
-After that I reinstalled opencv-contrib-python using
-
-pip install opencv-contrib-python
-And run the program, no error now. So I upvoted both the above answers :)"
-
-
-
-or installing conda mini: 
-
-https://anaconda.org/conda-forge/opencv
-/python-opencv-aruco-no-module-named-cv2-aruco
-
-
-# docker installation 
-
-Followed instructions here : 
-https://phoenixnap.com/kb/docker-on-raspberry-pi
-
-Commands to run : 
-
-sudo apt-get update && sudo apt-get upgrade
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo usermod -aG docker Pi
-
-this post : https://discuss.streamlit.io/t/how-to-use-streamlit-in-docker/1067/7  explains how to get streamlit installed on docker 
 
 
 ### If using the XPT2046 Touch Screen
@@ -94,12 +65,40 @@ dtparam=spi=on
 dtoverlay=ads7846,penirq=25,speed=10000,penirq_pull=2,xohms=150"
 
 Next Create directory /etc/X11/xorg.conf.d and file 99-calibration.conf in that directory
+
+
+sudo mkddir /etc/X11/xorg.conf.d 
+sudo nano /etc/X11/xorg.conf.d/99-calibration.conf
+
+
 Add the following into the file
 
-"Section "InputClass"
+
+Section "InputClass"
         Identifier "calibration"
         MatchProduct "ADS7846 Touchscreen"
         Option "Calibration" "3853 170 288 3796"
         Option "SwapAxes" "1"
-EndSection"
+EndSection
+
+
+
+## Todo 
+
+
+### docker installation 
+#### i couldnt get the following to work on the raspberry pi 
+#### i might be able to get it to work using the new "streamlit on 64bit Raspberry PI OS using conda" method above.  Just need to use correct base architecture 
+
+Followed instructions here : 
+https://phoenixnap.com/kb/docker-on-raspberry-pi
+
+Commands to run : 
+
+sudo apt-get update && sudo apt-get upgrade
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker Pi
+
+this post : https://discuss.streamlit.io/t/how-to-use-streamlit-in-docker/1067/7  explains how to get streamlit installed on docker 
 

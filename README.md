@@ -15,32 +15,26 @@ The openCV was taken from this article : https://towardsdatascience.com/computer
 
 
 
-### Installing streamlit on 64bit Raspberry PI OS using conda - confirmed working on Raspberry Pi 4 Model B 4 Gb RAM
+### Installing streamlit on 64bit Raspberry PI OS using conda - 
+
+confirmed working on:
+Raspberry Pi 4 Model B 4 Gb RAM
+
 
 Followed the instructions on the post here : https://discuss.streamlit.io/t/raspberry-pi-streamlit/2900/43
 
 Streamlit wont installed on 32bit Raspbian due to supported libraries.  We will use the ARM64 (the usual as of writing this is 32bit raspbian) which is still in beta but does work.  The 64bit version is also recomended for open CV due to speed.  Streamlit also recomends using conda to install its package ( it wont work otherwise), it also makes opencv easier too.  This was installed on a Raspberry Pi 4 Model B 4 Gb RAM.  Instructions below:
 
 
-A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img - download from here https://downloads.raspberrypi.org/raspios_arm64/images/
-$ wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh 4
-$ chmod +x Archiconda3-0.2.3-Linux-aarch64.sh
-$ ./Archiconda3-0.2.3-Linux-aarch64.sh (takes quite a while)
-$ conda install -c conda-forge streamlit (as @randyzwitch as suggested above)
-Streamlit installs – but does not work yet (I got AttributeError: module ‘google.protobuf.descriptor’ has no attribute '_internal_create_key when I tried to run the streamlit hello app)
-$ conda update conda -y
-$ pip install --upgrade protobuf (this solved: AttributeError: module ‘google.protobuf.descriptor’ …)
-$ pip install --upgrade pip (just for good measure – most likely not required)42 Gb RAM,
-A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img (I haven’t done any update of raspios because that would just be a waste of time if the Streamlit install should fail)
-$ wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh 4
-$ chmod +x Archiconda3-0.2.3-Linux-aarch64.sh
-$ ./Archiconda3-0.2.3-Linux-aarch64.sh (takes quite a while)
-$ conda install -c conda-forge streamlit (as @randyzwitch as suggested above)
-Streamlit installs – but does not work yet (I got AttributeError: module ‘google.protobuf.descriptor’ has no attribute '_internal_create_key when I tried to run the streamlit hello app)
-$ conda update conda -y
-$ pip install --upgrade protobuf (this solved: AttributeError: module ‘google.protobuf.descriptor’ …)
-$ pip install --upgrade pip (just for good measure – most likely not required)
-
+A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img - download from here https://downloads.raspberrypi.org/raspios_arm64/images/ <br/>
+$ wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh 4 <br/>
+$ chmod +x Archiconda3-0.2.3-Linux-aarch64.sh <br/>
+$ ./Archiconda3-0.2.3-Linux-aarch64.sh (takes quite a while) <br/>
+$ conda install -c conda-forge streamlit (as @randyzwitch as suggested above) <br/>
+Streamlit installs – but does not work yet (I got AttributeError: module ‘google.protobuf.descriptor’ has no attribute '_internal_create_key when I tried to run the streamlit hello app)<br/>
+$ conda update conda -y <br/>
+$ pip install --upgrade protobuf (this solved: AttributeError: module ‘google.protobuf.descriptor’ …)<br/>
+$ pip install --upgrade pip (just for good measure – most likely not required)2 Gb RAM<br/>
 
 
 ### arUco 

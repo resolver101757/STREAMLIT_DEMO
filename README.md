@@ -16,7 +16,11 @@ The openCV was taken from this article : https://towardsdatascience.com/computer
 <br>
 <br>
 
-### Installing streamlit on 64bit Raspberry PI OS using conda - confirmed working on Raspberry Pi 4 Model B 4 Gb RAM
+### Installing streamlit on 64bit Raspberry PI OS using conda - 
+
+confirmed working on:
+Raspberry Pi 4 Model B 4 Gb RAM
+
 
 <br>
 <br>
@@ -26,9 +30,6 @@ Streamlit wont installed on 32bit Raspbian due to supported libraries.  We will 
 <br><br>
 
 Instructions below:
-
-
-- A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img - download from here https://downloads.raspberrypi.org/raspios_arm64/images/
 
 - $ wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh 4
 - $ chmod +x Archiconda3-0.2.3-Linux-aarch64.sh

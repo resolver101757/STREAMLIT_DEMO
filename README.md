@@ -26,7 +26,7 @@ Raspberry Pi 4 Model B 4 Gb RAM
 
 <br>
 <br>
-Followed the instructions on the post here : https://discuss.streamlit.io/t/raspberry-pi-streamlit/2900/43
+Followed the instructions on the post here but pasted the commands i run below: https://discuss.streamlit.io/t/raspberry-pi-streamlit/2900/43
 
 Streamlit wont installed on 32bit Raspbian due to supported libraries.  We will use the ARM64 (the usual as of writing this is 32bit raspbian) which is still in beta but does work.  The 64bit version is also recomended for open CV due to speed.  Streamlit also recomends using conda to install its package ( it wont work otherwise), it also makes opencv easier too.  This was installed on a Raspberry Pi 4 Model B 4 Gb RAM.  
 <br><br>
@@ -47,7 +47,7 @@ Streamlit and Anaconda
 - $ conda update conda -y
 - $ pip install --upgrade protobuf (this solved: AttributeError: module ‘google.protobuf.descriptor’ …)
 - $ pip install --upgrade pip (just for good measure – most likely not required)42 Gb RAM,
-- A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img (I haven’t done any update of raspios because that would just be a waste of time if the Streamlit install should fail)
+
 
 <br>
 <br>
@@ -109,7 +109,7 @@ EndSection
 ## Todo 
 
 - [ ] docker installation 
-
+- [ ]  AruCo streamlit script
 
 ### Futher info on docker installation 
 

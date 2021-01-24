@@ -33,6 +33,12 @@ Streamlit wont installed on 32bit Raspbian due to supported libraries.  We will 
 
 Instructions below:
 
+Raspberry pi 64 bit
+
+- A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img - download from here https://downloads.raspberrypi.org/raspios_arm64/images/
+
+Streamlit and Anaconda
+
 - $ wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh 4
 - $ chmod +x Archiconda3-0.2.3-Linux-aarch64.sh
 - $ ./Archiconda3-0.2.3-Linux-aarch64.sh (takes quite a while)
@@ -42,14 +48,6 @@ Instructions below:
 - $ pip install --upgrade protobuf (this solved: AttributeError: module ‘google.protobuf.descriptor’ …)
 - $ pip install --upgrade pip (just for good measure – most likely not required)42 Gb RAM,
 - A fresh SD card with 2020-08-20-raspios-buster-arm64-lite.img (I haven’t done any update of raspios because that would just be a waste of time if the Streamlit install should fail)
-- $ wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh 4
-- $ chmod +x Archiconda3-0.2.3-Linux-aarch64.sh
-- $ ./Archiconda3-0.2.3-Linux-aarch64.sh (takes quite a while)
-- $ conda install -c conda-forge streamlit (as @randyzwitch as suggested above)
-- Streamlit installs – but does not work yet (I got AttributeError: module ‘google.protobuf.descriptor’ has no attribute '_internal_create_key when I tried to run the streamlit hello app)
-- $ conda update conda -y
-- $ pip install --upgrade protobuf (this solved: AttributeError: module ‘google.protobuf.descriptor’ …)
-- $ pip install --upgrade pip (just for good measure – most likely not required)
 
 <br>
 <br>

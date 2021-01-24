@@ -2,10 +2,10 @@
 
 
 ## Getting Started
-
+<br>
 Some scripts testing out the streamlit app
 
-- First_app.py                        shows a bunch of streamlit objects thrown onto the website 
+- First_app.py                        shows a bunch of streamlit objects thrown onto the browser, it gives a idea of what is available on streamlit  
 - take_a_picture.py                   draws boundries around a still photo taken on the webcam (or what ever is the default camera)
 - open_cv_face_detection _video.py    is simular take_a_picture.py but shows it in a live  video
 haarcascades folder                 has different opencv face detection parameters 
@@ -14,9 +14,8 @@ aruco_demo.py                       a quick demo find aruco items
 The openCV was taken from this article : https://towardsdatascience.com/computer-vision-for-beginners-part-3-79de62dbeef7 and her git page : https://github.com/jjone36/vision_4_beginners
 
 <br>
-<br>
 
-### Installing streamlit on 64bit Raspberry PI OS using conda - 
+### Installing streamlit on 64bit Raspberry PI OS using conda
 
 confirmed working on:
 Raspberry Pi 4 Model B 4 Gb RAM
@@ -57,18 +56,18 @@ Instructions below:
 Arcuo worked using the installation " streamlit on 64bit Raspberry PI OS using conda" above on Raspberry PI.  I imagine it will work on multiple linux versions, just need to make sure archicture version match up, that seams to be a sticking point on this and opencv.
 <br>
 <br>
-It didnt like the following statements.  The images can be loaded into memory.   
+It didnt like the following statements.  The images can be loaded into memory.
+<br>
 
+```
 cv2.imshow('Display', frame)
 if cv2.waitKey(1) & 0xFF == ord('q'):
 break
-
+```
 <br>
 <br>
 
 ### If using the XPT2046 Touch Screen
-
-<br>
 <br>
 
 - sudo nano /boot/config.txt
@@ -103,17 +102,17 @@ EndSection
 
 ## Todo 
 
+- [ ] docker installation 
 
-### docker installation 
 
-- i couldnt get the following to work on the raspberry pi 
+### Futher info on docker installation 
 
-- i might be able to get it to work using the new "streamlit on 64bit Raspberry PI OS using conda" method above.  Just need to use correct base architecture 
 
-Followed instructions here : 
-https://phoenixnap.com/kb/docker-on-raspberry-pi
+- I might be able to get it to work using the new "streamlit on 64bit Raspberry PI OS using conda" method above.  Just need to use correct base architecture (aarch64)
 
-Commands to run : 
+For docker installation, follow instructions here : https://phoenixnap.com/kb/docker-on-raspberry-pi
+
+Commands to run :
 ```
 sudo apt-get update && sudo apt-get upgrade
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -121,5 +120,4 @@ sudo sh get-docker.sh
 sudo usermod -aG docker Pi
 ```
 
-this post : https://discuss.streamlit.io/t/how-to-use-streamlit-in-docker/1067/7  explains how to get streamlit installed on docker 
-
+This post : https://discuss.streamlit.io/t/how-to-use-streamlit-in-docker/1067/7  explains how to get streamlit installed on docker
